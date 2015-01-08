@@ -10,16 +10,19 @@
  * into with Pro Meritage Inte'l Co., Ltd.
  */
 
-package com.pmt.helloworld.config;
+package com.pmt.helloworld.webapp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.JstlView;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import com.pmt.helloworld.webapp.interceptor.BasicInterceptor;
 
 /**
  * 
@@ -29,10 +32,10 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 @Configuration
 // Marks this class as configuration
 // Specifies which package to scan
-@ComponentScan("com.pmt.helloworld.controller")
+@ComponentScan(basePackages="com.pmt.helloworld.webapp.controller")
 // Enables Spring's annotations
 @EnableWebMvc
-public class Config extends WebMvcConfigurerAdapter{  
+public class MvcConfig extends WebMvcConfigurerAdapter{  
     
     /**
      * The caveat of mapping DispatcherServlet to “/” is that by default 
@@ -41,18 +44,28 @@ public class Config extends WebMvcConfigurerAdapter{
      * 
      * http://zeroturnaround.com/rebellabs/your-next-java-web-app-less-xml-no-long-restarts-fewer-hassles-part-1/ 
      */
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
+//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+//        configurer.enable();
+//    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations(
+                "/resources/");
     }
     
     @Bean
-    public UrlBasedViewResolver setupViewResolver() {
-        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
+    public ViewResolver setupViewResolver() {
+        InternalResourceViewResolver  resolver = new InternalResourceViewResolver();
         resolver.setPrefix("/WEB-INF/views/");
         resolver.setSuffix(".jsp");
-        resolver.setViewClass(JstlView.class);
         
         return resolver;
+    }
+    
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new BasicInterceptor());
     }
     
 }

@@ -6,18 +6,18 @@
 <head>
 	<meta http-equiv="Content-Type" content="width=device-width, initial-scale=1;text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="/springmvc/resources/css/bootstrap/bootstrap.min.css" />
-	<title>Spring4 MVC -HelloWorld</title>
+	<title>Login Success Page</title>
 </head>
 
 <body>
 
-    <%@ include file="common/navbar.jsp"%>
-    
 	<div class="container-fluid">
 		<div class="text-center">
-			<h1>Hello : ${name}</h1>
-			<h1>Your Phone Number : ${tel}</h1>
-			<input type="button" class="btn btn-success" onclick="history.back()" value="上一頁"></input>
+			<h1>login page</h1>
+			<h1>${result}</h1>
+			<form action="/springmvc/gohome" >
+			   <button type="submit" class="btn btn-success" >回主頁</button>
+			</form>
 		</div>
 			
 	</div>

@@ -4,16 +4,20 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <!-- jQuery 1.11.1 -->
+    <script type="text/javascript" src="/springmvc/resources/scripts/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.1 -->
+    <script type="text/javascript" src="/springmvc/resources/scripts/bootstrap/bootstrap.min.js"></script>
+    
     <style>
         body {
-        padding-top: 35px;
-        padding-bottom: 50px;
+        margin-top: 35px;
         }
         
         .sec {
         padding-top: 35px;
-        padding-bottom: 30px;
-        min-height: 550px;
+        min-height: 600px;
         }
         .img-responsive {
 		    display: block;
@@ -96,6 +100,7 @@
 		    margin: -2px 0px 0px -2px;
 		    background: #ccc;
 		    background: rgba(255,255,255,0.75);
+		    background: rgba(0,30,62,0.75);
 		    border-radius: 100%;
 		    line-height: 5em; /* sneaky: hide inner text */
 		    transition: all 0.1s ease-in-out;
@@ -111,6 +116,7 @@
 		    height: 12px;
 		    margin: -6px 0px 0px -6px;
 		    background: #fff;
+		    background-color: rgba(2,223,130,0.75);
 		}
 		
 		.sohp-dots-nav li.selected a {
@@ -119,13 +125,25 @@
 		
 		.sohp-dots-nav li:not(.selected):hover a {
 		    background-color: rgba(255,255,255,0.75);
+		    background-color: rgba(2,223,130,0.75);
 		    width: 10px;
 		    height: 10px;
 		    margin: -5px 0px 0px -5px;
 		}		
 		
+		
+		.arrows span:hover {
+		  color: white;
+		  font-size: 30px;
+		}
     </style>
     
+    <!-- jQuery 1.11.1 
+	<script type="text/javascript" src="/springmvc/resources/scripts/jquery/jquery.min.js"></script>
+	-->
+	<!-- Bootstrap 3.3.1 
+	<script type="text/javascript" src="/springmvc/resources/scripts/bootstrap/bootstrap.min.js"></script>
+	-->
 </head>
 
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -145,39 +163,68 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active page-scroll"><a href="<c:url value='/#first'/>">Link 1<span class="sr-only">(current)</span></a></li>
-                <li class="page-scroll"><a href="<c:url value='/#second'/>">Link 2</a></li>
-                <li class="page-scroll"><a href="<c:url value='/#third'/>">Link 3</a></li>
+                <li class="page-scroll"><a href="<c:url value='/#sec1'/>">Link 1<span class="sr-only">(current)</span></a></li>
+                <li class="page-scroll"><a href="<c:url value='/#sec2'/>">Link 2</a></li>
+                <li class="page-scroll"><a href="<c:url value='/#sec3'/>">Link 3</a></li>
             </ul>
-			<span class="img">
-				<img src="resources/images/up.png" height="20" width="30" />
-			</span>
-			<span class="img">
-				<img src="resources/images/down.png" height="20" width="30" />
-			</span>
-		<div class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-	                <ul class="dropdown-menu" role="menu">
-	                    <li><a href="helloBilly">Hello Billy</a></li>
-	                    <li><a href="helloRita">Hello Rita</a></li>
-	                    <li><a href="helloLawrence">Hello Lawrence</a></li>
-	                    <li class="divider"></li>
-	                    <li><a href="#">Separated link</a></li>
-	                    <li class="divider"></li>
-	                    <li><a href="#">One more separated link</a></li>
-	                </ul>
-                </li>
-                <form action="hello" method="get" class="navbar-form navbar-left" role="submit">
-	                <div class="form-group">
-	                    <input type="text" class="form-control" name="name" placeholder="input your name">
-	                </div>
-	                <button type="submit" class="btn btn-default">Submit</button>
-	            </form>
+		    <div class="nav navbar-nav navbar-right">
+	             <c:if test="${!isLogin}">
+		             <li class="active page-scroll">
+    	                 <a id="login">Login</a>
+	                 </li>
+	             </c:if>
+	             <c:if test="${isLogin}">
+                    <li class="active page-scroll">
+                        <form action="login/logout" method="get">
+                           <a>
+                            <button class="btn btn-danger btn-lg"  type="submit">登出</button>
+                           </a>
+                        </form>
+                    </li>
+                    <li class="active page-scroll">
+                        <a>Hello ${userName}</a>
+                    </li>
+                 </c:if>
             </div>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
       
     </nav>
-     
+    
+<div id="loginModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">登入會員</h4>
+			</div>
+			<form action="login/login" method="get">
+				<div class="modal-body">
+				    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">帳號</span>
+                        <input type="text" class="form-control" name="userName" placeholder="userName" aria-describedby="basic-addon1">
+                    </div>
+                    <br>
+				    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2">密碼</span>
+                        <input type="password" class="form-control" name="password" placeholder="password" aria-describedby="basic-addon2">
+                    </div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="submit" class="btn btn-primary">登入</button>
+				</div>
+			</form>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+
+	$('#login').on('click', function () {
+		$('#loginModal').modal('show');
+		$('#myInput').focus();
+	})
+	
+</script>     
 </html>

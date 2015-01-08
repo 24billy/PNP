@@ -9,9 +9,10 @@
   <properties>
         <spring.version>4.1.2.RELEASE</spring.version>
         <jdk.version>1.6</jdk.version>
-        <junit.version>3.8.1</junit.version>
+        <junit.version>4.12</junit.version>
         <skipTests>true</skipTests>
         <servlet.version>3.0.1</servlet.version>
+        <postgreSQL.driver>9.1-901-1.jdbc4</postgreSQL.driver>
         <!-- maven env setting -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -84,9 +85,20 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
+			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
 
 		<!-- servlet -->
 		<dependency>
@@ -109,6 +121,13 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
+		</dependency>
+		
+		<!-- postgreSQL driver -->
+		<dependency>
+		    <groupId>postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
+		    <version>${postgreSQL.driver}</version>
 		</dependency>
 	</dependencies>
     
