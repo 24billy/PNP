@@ -13,6 +13,7 @@
         <skipTests>true</skipTests>
         <servlet.version>3.0.1</servlet.version>
         <postgreSQL.driver>9.1-901-1.jdbc4</postgreSQL.driver>
+        <project.oauth.version>1.19.0</project.oauth.version>
         <!-- maven env setting -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -128,6 +129,25 @@
 		    <groupId>postgresql</groupId>
 		    <artifactId>postgresql</artifactId>
 		    <version>${postgreSQL.driver}</version>
+		</dependency>
+		
+		<!-- google Oauth2 -->
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-oauth2</artifactId>
+			<version>v2-rev75-1.19.0</version>
+		</dependency>
+		<!-- Extensions To The Google HTTP  
+		<dependency> 
+			<groupId>com.google.http-client</groupId> 
+			<artifactId>google-http-client-jackson2</artifactId> 
+			<version>${project.http.version}</version> 
+		</dependency> 
+		-->
+		<dependency>
+			<groupId>com.google.oauth-client</groupId>
+			<artifactId>google-oauth-client-jetty</artifactId>
+			<version>${project.oauth.version}</version>
 		</dependency>
 	</dependencies>
     
