@@ -172,6 +172,9 @@
 		             <li class="active page-scroll">
     	                 <a id="login">Login</a>
 	                 </li>
+	                 <li>
+                         <a id="loginByGoogle" href="<c:url value='/login/loginByGoogle'/>">Login(google)</a>
+	                 </li>
 	             </c:if>
 	             <c:if test="${isLogin}">
                     <li class="active page-scroll">

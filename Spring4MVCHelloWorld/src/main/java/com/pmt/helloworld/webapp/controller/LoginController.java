@@ -12,6 +12,9 @@
 
 package com.pmt.helloworld.webapp.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pmt.helloworld.core.business.service.LoginService;
+import com.pmt.helloworld.core.security.oauth2.AuthorizationManager;
 import com.pmt.helloworld.core.vo.EmployeeVO;
 
 /**
@@ -85,7 +89,36 @@ public class LoginController {
         request.getSession().removeAttribute("userName");
         request.getSession().removeAttribute("isLogin");
         
+        AuthorizationManager.removeStoredCredential();;
+        
         return "redirect:/home";
+    }
+    
+    @RequestMapping("/loginByGoogle")
+    public String loginByGoogle(Model model, HttpServletRequest request) {
+        Map<String, String> resultMap = new HashMap<String, String>();
+        
+        try {
+            resultMap = AuthorizationManager.getAuth();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String hd = resultMap.get("hd");
+        String name = resultMap.get("givenName");
+        
+        //validate
+        if ("promeritage.com.tw".equals(hd)) {
+            request.getSession().setAttribute("userName", name);
+            request.getSession().setAttribute("isLogin", true);
+            model.addAttribute("result","登入成功");
+        } else {
+            AuthorizationManager.removeStoredCredential();
+            request.getSession().removeAttribute("userName");
+            request.getSession().setAttribute("isLogin", false);
+            model.addAttribute("result","登入失敗");
+        }
+        
+        return "login";
     }
     
 }
