@@ -16,25 +16,25 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pmt.helloworld.SpringTest;
-import com.pmt.helloworld.core.business.service.LoginService;
+import com.pmt.helloworld.core.business.service.IEmpService;
 
 /**
  * @author Billy
- * (功能描述可寫於此)
+ * [員工] 相關服務單元測試
  */
-public class LoginServiceImplTest extends SpringTest{
+public class EmpServiceImplTest extends SpringTest{
     
     @Autowired
-    LoginService dao;
+    IEmpService service;
     
     @Test
     public void testLoginDaoImpl() {
-        showPojoContent(dao.getEmployeeInfoByUserName("Billy"));
+        showPojoContent(service.getEmployeeInfoByUserName("Billy"));
     }
-
+    
     @Test
-    public void testGetEmployeeInfoById() {
-        showPojoContent(dao.getGmailInfoByUserName("billy.shih@promeritage.com.tw"));
+    public void testGetRestDays() {
+        showDataList(service.getRestDays("1"));
     }
 
 }

@@ -45,9 +45,9 @@ public class AuthorizationManagerTest extends BasicTest {
         try {
             dataStoreFactory = new FileDataStoreFactory(DATA_STORE_DIR);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
         fileDirectory = dataStoreFactory.getDataDirectory().getAbsolutePath();
         System.out.println("delete file : " + fileDirectory + "/" + fileName);
         

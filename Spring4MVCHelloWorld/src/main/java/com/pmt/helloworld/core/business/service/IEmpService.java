@@ -12,29 +12,31 @@
 
 package com.pmt.helloworld.core.business.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.pmt.helloworld.core.vo.EmployeeVO;
-import com.pmt.helloworld.core.vo.GmailVO;
 
 /**
  * @author Billy
- * [登入] 服務
+ * [員工] 服務
  */
-public interface LoginService {
+public interface IEmpService {
     
     /**
      * 取得員工資訊
-     * @param userName
+     * @param name
      * @return
      *  EmployeeVO
      */
-    EmployeeVO getEmployeeInfoByUserName(String userName);
+    EmployeeVO getEmployeeInfoByUserName(String name);
     
     /**
-     * 取得Gmail密碼
-     * @param email
+     * 取得特休資料
+     * @param empNo
      * @return
-     *  GmailVO
+     *   List<Map<String, Object>>
      */
-    GmailVO getGmailInfoByUserName(String email);
+    List<Map<String, Object>> getRestDays(String empNo);
     
 }

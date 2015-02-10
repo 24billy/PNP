@@ -36,6 +36,24 @@ public class HelloWorldController {
         return "helloworld";    // 頁面導向 /WEB-INF/views/  搜索檔案類型.jsp
     }
     
+    @RequestMapping("/helloBilly")
+    public String helloBilly(Model model) {
+        model.addAttribute("name", "Billy");
+        return "helloworld";
+    }
+    
+    @RequestMapping("/helloRita")
+    public String helloRita(Model model) {
+        model.addAttribute("name", "Rita");
+        return "helloworld";
+    }
+    
+    @RequestMapping("/helloLawrence")
+    public String helloLawrence(Model model) {
+        model.addAttribute("name", "Lawrence");
+        return "helloworld";
+    }
+    
     @RequestMapping("/gohome")  // 作用等同<url-pattern>
     public String login(
             @RequestParam(value = "userName", required = false) String userName,

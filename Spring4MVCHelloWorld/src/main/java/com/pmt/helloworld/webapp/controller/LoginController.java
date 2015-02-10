@@ -23,38 +23,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.pmt.helloworld.core.business.service.LoginService;
+import com.pmt.helloworld.core.business.service.IEmpService;
 import com.pmt.helloworld.core.security.oauth2.AuthorizationManager;
 import com.pmt.helloworld.core.vo.EmployeeVO;
 
 /**
  * @author Billy
- * (功能描述可寫於此)
+ * [登入] 導頁控制器
  */
 @Controller
 @RequestMapping("/login")
 public class LoginController {
 
     @Autowired
-    private LoginService loginService;
-    
-    @RequestMapping("/helloBilly")
-    public String helloBilly(Model model) {
-        model.addAttribute("name", "Billy");
-        return "helloworld";
-    }
-    
-    @RequestMapping("/helloRita")
-    public String helloRita(Model model) {
-        model.addAttribute("name", "Rita");
-        return "helloworld";
-    }
-    
-    @RequestMapping("/helloLawrence")
-    public String helloLawrence(Model model) {
-        model.addAttribute("name", "Lawrence");
-        return "helloworld";
-    }
+    private IEmpService empService;
     
     @RequestMapping("/login")
     public String login(
@@ -63,15 +45,14 @@ public class LoginController {
             Model model, HttpServletRequest request) {
         EmployeeVO emp = new EmployeeVO();
         String email = "";
-        emp = loginService.getEmployeeInfoByUserName(userName);
+        emp = empService.getEmployeeInfoByUserName(userName);
         
         if(emp!=null){
              email = emp.getEmail();
         }
         
         if(email != ""){
-            String comparedPassword = loginService.getGmailInfoByUserName(email).getPassword();   
-            if(password.equals(comparedPassword)){
+            if(email.equals("billy.shih@promeritage.com.tw")){
                 model.addAttribute("result","登入成功");
                 request.getSession().setAttribute("userName",userName);
                 request.getSession().setAttribute("isLogin",true);
@@ -98,13 +79,15 @@ public class LoginController {
     public String loginByGoogle(Model model, HttpServletRequest request) {
         Map<String, String> resultMap = new HashMap<String, String>();
         
+        // 透過Oauth取得Google的相關資訊
         try {
             resultMap = AuthorizationManager.getAuth();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String hd = resultMap.get("hd");
-        String name = resultMap.get("givenName");
+        
+        String hd = resultMap.get("hd"); //取得email資訊
+        String name = resultMap.get("givenName");  //取得使用者名稱
         
         //validate
         if ("promeritage.com.tw".equals(hd)) {

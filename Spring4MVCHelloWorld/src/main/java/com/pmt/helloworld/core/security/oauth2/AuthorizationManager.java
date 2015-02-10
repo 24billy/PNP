@@ -154,8 +154,7 @@ public class AuthorizationManager {
     
     private static void header(String name) {
         System.out.println();
-        System.out
-                .println("================== " + name + " ==================");
+        System.out.println("================== " + name + " ==================");
         System.out.println();
     }
     
@@ -165,8 +164,8 @@ public class AuthorizationManager {
     public static void removeStoredCredential() {
         String fileDirectory = dataStoreFactory.getDataDirectory().getAbsolutePath();
         String fileName = "StoredCredential";
-        
         File file = new File(fileDirectory + "/" + fileName);
+        
         file.delete();
     }
     

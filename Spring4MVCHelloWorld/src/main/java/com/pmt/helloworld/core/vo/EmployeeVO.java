@@ -14,46 +14,70 @@ package com.pmt.helloworld.core.vo;
 
 /**
  * @author Billy
- * EmployeeVO
+ * 人員資料封裝物件
  */
 public class EmployeeVO {
 
-    private Integer id;
-    private String name;
-    private String tel;
-    private String title;
-    private String location;
-    private String email;
-    
-    public Integer getId() {
-        return id;
+    private String empNo; //員工編號 
+    private String empName; //員工中文姓名
+    private String engName; //員工英文姓名
+    private String titleName; //職稱外顯中文
+    private String endDate;  //到職日
+    private String offDate;  //離職日
+    private String sex;  //性別
+    private String mobile;  //手機
+    private String email;  //Email
+    private Integer seniority;  //年資
+    private String deptCode;  //部門代號
+    private String shiftId;  //班別唯一識別碼
+      
+    public String getEmpNo() {
+        return empNo;
     }
-    public void setId(Integer id) {
-        this.id = id;
+    public void setEmpNo(String empNo) {
+        this.empNo = empNo;
     }
-    public String getName() {
-        return name;
+    public String getEmpName() {
+        return empName;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setEmpName(String empName) {
+        this.empName = empName;
     }
-    public String getTel() {
-        return tel;
+    public String getEngName() {
+        return engName;
     }
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setEngName(String engName) {
+        this.engName = engName;
     }
-    public String getTitle() {
-        return title;
+    public String getTitleName() {
+        return titleName;
     }
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitleName(String titleName) {
+        this.titleName = titleName;
     }
-    public String getLocation() {
-        return location;
+    public String getEndDate() {
+        return endDate;
     }
-    public void setLocation(String location) {
-        this.location = location;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+    public String getOffDate() {
+        return offDate;
+    }
+    public void setOffDate(String offDate) {
+        this.offDate = offDate;
+    }
+    public String getSex() {
+        return sex;
+    }
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+    public String getMobile() {
+        return mobile;
+    }
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
     public String getEmail() {
         return email;
@@ -61,12 +85,33 @@ public class EmployeeVO {
     public void setEmail(String email) {
         this.email = email;
     }
+    public Integer getSeniority() {
+        return seniority;
+    }
+    public void setSeniority(Integer seniority) {
+        this.seniority = seniority;
+    }
+    public String getDeptCode() {
+        return deptCode;
+    }
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode;
+    }
+    public String getShiftId() {
+        return shiftId;
+    }
+    public void setShiftId(String shiftId) {
+        this.shiftId = shiftId;
+    }
     
     @Override
     public String toString() {
-        return "EmployeeVO [id=" + id + ", name=" + name + ", tel=" + tel
-                + ", title=" + title + ", location=" + location + ", email="
-                + email + "]";
+        return "EmployeeVO [empNo=" + empNo + ", empName=" + empName
+                + ", engName=" + engName + ", titleName=" + titleName
+                + ", endDate=" + endDate + ", offDate=" + offDate + ", sex="
+                + sex + ", mobile=" + mobile + ", email=" + email
+                + ", seniority=" + seniority + ", deptCode=" + deptCode
+                + ", shiftId=" + shiftId + "]";
     }
     
 }
